@@ -1,0 +1,9 @@
+.button-edit_place_margin {
+  margin-bottom: 8px;
+}
+
+@media (min-width: 320px) and (max-width: 424px) {
+  .button-edit_place_margin {
+    margin: 22.25px 0 22px;
+  }
+}
