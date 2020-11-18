@@ -1,0 +1,17 @@
+.button-add {
+  grid-area: button_add;
+  background-image: url(../../images/plus.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  align-self: center;
+  width: 150px;
+  height: 50px;
+  border: 2px #fff solid;
+  box-sizing: border-box;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .button-add {
+    width: 100%;
+  }
+}
