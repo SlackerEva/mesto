@@ -1,13 +1,21 @@
 .button-edit {
   grid-area: button_edit;
-  background-image: url(../../images/edit.png);
+  /*background-image: url(../../images/edit.png);
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center;*/
+  background: transparent;
   align-self: end;
   width: 24px;
   height: 24px;
   border: 1px #fff solid;
   box-sizing: border-box;
+  cursor: pointer;
+  padding: 0;
+}
+
+.button-edit:hover {
+  border: 1px rgba(255, 255, 255, 0.6) solid;
+  filter: brightness(0.6);
 }
 
 @media (min-width: 320px) and (max-width: 424px) {
