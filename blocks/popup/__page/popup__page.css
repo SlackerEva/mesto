@@ -1,0 +1,13 @@
+.popup__page {
+  height: 330px;
+  display: flex;
+  justify-content: center;
+  padding: 195px 19px 0;
+}
+
+@media (min-width: 320px) and (max-width: 424px) {
+  .popup__page {
+    height: 322px;
+    padding-top: 123px;
+  }
+}

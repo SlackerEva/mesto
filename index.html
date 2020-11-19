@@ -17,7 +17,9 @@
         <img class="intro__img" src="images/jack.jpg" alt="Фото Жака-Ив Кусто">
         <h1 class="intro__title">Жак-Ив Кусто</h1>
         <p class="intro__paragraph">Исследователь океана</p>
-        <div class="button-edit button-edit_place_margin"></div>
+        <button class="button-edit button-edit_place_margin">
+          <img class="button-edit__img" src="images/edit.png" alt="Редактировать">
+        </button>
         <div class="button-add"></div>
       </div>
       <ul class="cards">
@@ -69,6 +71,18 @@
     <footer class="footer">
       <p class="footer__text">&copy; 2020 Mesto Russia</p>
     </footer>
+
+    <div class="popup">
+      <div class="popup__page">
+        <div class="popup__content">
+          <button class="popup__close"><img class="popup__img" src="images/cros.png" alt="Закрыть"></button>
+          <h2 class="popup__subtitle">Редактировать профиль</h2>
+          <input class="popup__name input-general" type="text" name="username" placeholder="Имя" value="Жак-Ив Кусто">
+          <input class="popup__job input-general" type="text" name="userjob" placeholder="О Себе" value="Исследователь океана">
+          <button class="button-save" type="submit">Сохранить</button>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>
