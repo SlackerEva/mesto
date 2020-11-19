@@ -1,9 +1,0 @@
-.popup__name {
-  margin: 54px 0 30px;
-}
-
-@media (min-width: 320px) and (max-width: 424px) {
-  .popup__name {
-    margin-top: 75px;
-  }
-}
