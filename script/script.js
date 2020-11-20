@@ -4,11 +4,11 @@ let button_close = document.querySelector(".popup__close");
 let form = document.querySelector(".popup__content");
 let nameInput = document.querySelector("input[name='username']");
 let jobInput = document.querySelector("input[name='userjob']");
+let title = document.querySelector(".intro__title");
+let paragraph = document.querySelector(".intro__paragraph");
 
 function preventDefault(evt) {
   evt.preventDefault();
-  let title = document.querySelector(".intro__title");
-  let paragraph = document.querySelector(".intro__paragraph");
   title.textContent = nameInput.value;
   paragraph.textContent = jobInput.value;
   popupClose();
@@ -16,6 +16,8 @@ function preventDefault(evt) {
 
 function popupOpen() {
   popup.classList.add("popup_opened");
+  nameInput.value = title.textContent;
+  jobInput.value = paragraph.textContent;
 }
 
 function popupClose() {
