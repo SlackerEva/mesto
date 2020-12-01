@@ -26,48 +26,6 @@
       </section>
       <section class="gallery">
         <ul class="cards">
-          <li class="card">
-            <img class="card__img" src="images/karachevsk.jpg" alt="Карачаевск">
-            <div class="card__panel">
-              <h2 class="card__subtitle">Карачаевск</h2>
-              <button class="card__button" type="button"><img class="card__like" src="images/heart.svg" alt="Лайк"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__img" src="images/mountain.jpg" alt="Гора Эльбрус">
-            <div class="card__panel">
-              <h2 class="card__subtitle">Гора Эльбрус</h2>
-              <button class="card__button" type="button"><img class="card__like" src="images/heart.svg" alt="Лайк"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__img" src="images/dombai.jpg" alt="Домбай">
-            <div class="card__panel">
-              <h2 class="card__subtitle">Домбай</h2>
-              <button class="card__button" type="button"><img class="card__like" src="images/heart.svg" alt="Лайк"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__img" src="images/mountain.jpg" alt="Гора Эльбрус">
-            <div class="card__panel">
-              <h2 class="card__subtitle">Гора Эльбрус</h2>
-              <button class="card__button" type="button"><img class="card__like" src="images/heart.svg" alt="Лайк"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__img" src="images/dombai.jpg" alt="Домбай">
-            <div class="card__panel">
-              <h2 class="card__subtitle">Домбай</h2>
-              <button class="card__button" type="button"><img class="card__like" src="images/heart.svg" alt="Лайк"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img class="card__img" src="images/karachevsk.jpg" alt="Карачаево-Черкесия">
-            <div class="card__panel">
-              <h2 class="card__subtitle">Карачаево-Черкесия</h2>
-              <button class="card__button" type="button"><img class="card__like" src="images/heart.svg" alt="Лайк"></button>
-            </div>
-          </li>
         </ul>
       </section>
     </main>
@@ -87,6 +45,16 @@
         </form>
       </div>
     </div>
+
+    <template id="card">
+      <li class="card">
+        <img class="card__img">
+        <div class="card__panel">
+          <h2 class="card__subtitle"></h2>
+          <button class="card__button" type="button"><img class="card__like" src="images/heart.svg" alt="Лайк"></button>
+        </div>
+      </li>
+    </template>
   </div>
   <script src="script/script.js"></script> 
 </body>
