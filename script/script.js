@@ -37,21 +37,22 @@ let placeLinkInput = document.querySelector("input[name='placelink']");
 let title = document.querySelector(".intro__title");
 let paragraph = document.querySelector(".intro__paragraph");
 let subtitle = document.querySelector(".popup__subtitle");
-let button_heart = document.querySelectorAll(".card__button");
+const button_heart = document.querySelectorAll(".card__button");
+const button_trash = document.querySelectorAll(".card__button-trash");
 
 const cardTemplate = document.querySelector("#card").content;
 const cards = document.querySelector(".cards");
-
-initialCards.map(x => buildCard(x));
 
 function buildCard(x) {
   const cardElement = cardTemplate.cloneNode(true);
   cardElement.querySelector(".card__img").src = x.link;
   cardElement.querySelector(".card__img").alt = x.name;
   cardElement.querySelector(".card__subtitle").textContent = x.name;
-  addListnerToHeart (cardElement.querySelector(".card__button"));
+  addListnerToHeart(cardElement.querySelector(".card__button"));
+  removeCard(cardElement.querySelector(".card__button-trash"));
   return cards.prepend(cardElement); 
 }
+initialCards.map(x => buildCard(x));
 
 function preventDefault(evt) {
   evt.preventDefault();
@@ -101,11 +102,19 @@ button_edit.addEventListener("click", function(){popupOpen("edit")});
 button_close.addEventListener("click", popupClose);
 form.addEventListener("submit", preventDefault);
 
-button_heart.forEach(x => addListnerToHeart(x));
-
 function addListnerToHeart (x) {
   x.addEventListener("click", function (evt) {
     const eventTarget = evt.target;
     eventTarget.getAttribute("src").includes("black") ? eventTarget.setAttribute("src", "images/heart.svg") : eventTarget.setAttribute("src", "images/blackHeart.svg");
   });
 }
+button_heart.forEach(x => addListnerToHeart(x));
+
+function removeCard(x) {
+  x.addEventListener("click", function () {
+   let item = x.closest('.card');
+   item.remove();
+  });
+
+}
+button_trash.forEach(x => removeCard(x));

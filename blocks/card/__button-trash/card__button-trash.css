@@ -1,0 +1,13 @@
+.card__button-trash {
+  position: absolute;
+  display: flex;
+  border: none;
+  background: transparent;
+  top: 18px;
+  right: 15px;
+}
+
+.card__button-trash:focus {
+  outline: none;
+  border: none;
+}
