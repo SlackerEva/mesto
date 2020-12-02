@@ -40,18 +40,31 @@ let subtitle = document.querySelector(".popup__subtitle");
 
 const cardTemplate = document.querySelector("#card").content;
 const cards = document.querySelector(".cards");
-initialCards.map(x => {
+initialCards.map(x => {buildCard(x)});
+
+function buildCard(x) {
   const cardElement = cardTemplate.cloneNode(true);
   cardElement.querySelector(".card__img").src = x.link;
   cardElement.querySelector(".card__img").alt = x.name;
   cardElement.querySelector(".card__subtitle").textContent = x.name;
-  return cards.append(cardElement); 
-});
+  return cards.prepend(cardElement); 
+}
 
 function preventDefault(evt) {
   evt.preventDefault();
-  title.textContent = nameInput.value;
-  paragraph.textContent = jobInput.value;
+  if (subtitle.textContent === "Редактировать профиль") {
+    title.textContent = nameInput.value;
+    paragraph.textContent = jobInput.value;
+  } else {
+    let placeName = placeNameInput.value;
+    let placeLink = placeLinkInput.value;
+    if (placeName !="" && placeLink !="") {
+      buildCard({      
+        name: placeName,
+        link: placeLink
+      })
+    }
+  }
   popupClose();
 }; 
 
@@ -66,7 +79,7 @@ function popupOpen(evt) {
   } else {
     subtitle.textContent = "Новое место";
     placeNameInput.classList.add("popup_opened");
-    placeLinkInput.classList.add("popup_opened");
+    placeLinkInput.classList.add("popup_opened");  
   }
 }
 
@@ -76,6 +89,8 @@ function popupClose() {
   jobInput.classList.remove("popup_opened");
   placeNameInput.classList.remove("popup_opened");
   placeLinkInput.classList.remove("popup_opened");
+  placeNameInput.value = "";
+  placeLinkInput.value = "";
 }
 
 button_add.addEventListener("click", function(){popupOpen("add")});
