@@ -1,0 +1,13 @@
+.card__button-show {
+  border-top-left-radius: 4%;
+  border-top-right-radius: 4%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+}
+
+.card__button-show:focus {
+  outline: none;
+  border: none;
+}
