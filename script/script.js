@@ -73,6 +73,12 @@ function preventDefault(evt) {
   popupClose();
 }; 
 
+
+function DoThen(first, second) {
+  first();
+  second();
+}
+
 function popupOpen(evt) {
   popup.classList.add("popup_opened");
   if (evt === "edit") {
