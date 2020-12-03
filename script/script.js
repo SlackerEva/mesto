@@ -50,6 +50,7 @@ function buildCard(x) {
   cardElement.querySelector(".card__subtitle").textContent = x.name;
   addListnerToHeart(cardElement.querySelector(".card__button"));
   removeCard(cardElement.querySelector(".card__button-trash"));
+  addListnerToImg(cardElement.querySelector(".card__button-show"));
   return cards.prepend(cardElement); 
 }
 initialCards.map(x => buildCard(x));
@@ -87,8 +88,13 @@ function popupOpen(evt) {
   }
 }
 
+let button_show = document.querySelectorAll(".card__button-show");
+let popup_show = document.querySelector(".popup-show");
+let button_close_show = popup_show.querySelector(".popup__close");
+
 function popupClose() {
   popup.classList.remove("popup_opened");
+  popup_show.classList.remove("popup_opened");
   nameInput.classList.remove("popup_opened");
   jobInput.classList.remove("popup_opened");
   placeNameInput.classList.remove("popup_opened");
@@ -100,6 +106,7 @@ function popupClose() {
 button_add.addEventListener("click", function(){popupOpen("add")});
 button_edit.addEventListener("click", function(){popupOpen("edit")});
 button_close.addEventListener("click", popupClose);
+button_close_show.addEventListener("click", popupClose);
 form.addEventListener("submit", preventDefault);
 
 function addListnerToHeart (x) {
@@ -118,3 +125,13 @@ function removeCard(x) {
 
 }
 button_trash.forEach(x => removeCard(x));
+
+function addListnerToImg(x) {
+  x.addEventListener("click", function () {
+    popup_show.classList.add("popup_opened");
+    popup_show.querySelector(".popup__show-img").src = x.querySelector(".card__img").src;
+    popup_show.querySelector(".popup__text").textContent = x.querySelector(".card__img").alt;
+  });
+}
+
+button_show.forEach(x => addListnerToImg(x));
