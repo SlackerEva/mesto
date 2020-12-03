@@ -29,7 +29,8 @@ let popup = document.querySelector(".popup");
 let button_add = document.querySelector(".intro__button-add");
 let button_edit = document.querySelector(".intro__button-edit");
 let button_close = document.querySelector(".popup__close");
-let form = document.querySelector(".popup__content");
+let form = document.querySelector("form[name='edit-profile']");
+let form_add = document.querySelector("form[name='add-card']");
 let nameInput = document.querySelector("input[name='username']");
 let jobInput = document.querySelector("input[name='userjob']");
 let placeNameInput = document.querySelector("input[name='placename']");
@@ -57,7 +58,8 @@ initialCards.map(x => buildCard(x));
 
 function preventDefault(evt) {
   evt.preventDefault();
-  if (subtitle.textContent === "Редактировать профиль") {
+  const eventTarget = evt.target;
+  if (eventTarget.name === "edit-profile") {
     title.textContent = nameInput.value;
     paragraph.textContent = jobInput.value;
   } else {
@@ -73,38 +75,26 @@ function preventDefault(evt) {
   popupClose();
 }; 
 
-
-function DoThen(first, second) {
-  first();
-  second();
-}
-
 function popupOpen(evt) {
-  popup.classList.add("popup_opened");
   if (evt === "edit") {
-    nameInput.classList.add("popup_opened");
-    jobInput.classList.add("popup_opened");
-    subtitle.textContent = "Редактировать профиль";
+    popup.classList.add("popup_opened");
     nameInput.value = title.textContent;
     jobInput.value = paragraph.textContent;
   } else {
-    subtitle.textContent = "Новое место";
-    placeNameInput.classList.add("popup_opened");
-    placeLinkInput.classList.add("popup_opened");  
+    popup_add.classList.add("popup_opened");
   }
 }
 
 let button_show = document.querySelectorAll(".card__button-show");
 let popup_show = document.querySelector(".popup-show");
 let button_close_show = popup_show.querySelector(".popup__close");
+let popup_add = document.querySelector(".popup-add");
+let button_close_add = popup_add.querySelector(".popup__close");
 
 function popupClose() {
   popup.classList.remove("popup_opened");
+  popup_add.classList.remove("popup_opened");
   popup_show.classList.remove("popup_opened");
-  nameInput.classList.remove("popup_opened");
-  jobInput.classList.remove("popup_opened");
-  placeNameInput.classList.remove("popup_opened");
-  placeLinkInput.classList.remove("popup_opened");
   placeNameInput.value = "";
   placeLinkInput.value = "";
 }
@@ -113,7 +103,9 @@ button_add.addEventListener("click", function(){popupOpen("add")});
 button_edit.addEventListener("click", function(){popupOpen("edit")});
 button_close.addEventListener("click", popupClose);
 button_close_show.addEventListener("click", popupClose);
+button_close_add.addEventListener("click", popupClose);
 form.addEventListener("submit", preventDefault);
+form_add.addEventListener("submit", preventDefault);
 
 function addListnerToHeart (x) {
   x.addEventListener("click", function (evt) {
