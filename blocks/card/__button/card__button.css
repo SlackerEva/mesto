@@ -2,6 +2,7 @@
   display: flex;
   border: none;
   background: transparent;
+  cursor: pointer;
 }
 
 .card__button:focus {
