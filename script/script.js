@@ -94,7 +94,7 @@ function addListnerToHeart (item) {
 
 function removeCard(item) {
   item.addEventListener("click", function () {
-   const card = item.closest('.card');
+   const card = item.closest(".card");
    card.remove();
   });
 }
@@ -109,3 +109,73 @@ function addListnerToImg(item) {
     popupShow.querySelector(".popup__text").textContent = item.querySelector(".card__img").alt;
   });
 }
+
+
+const popupElement = document.querySelector(".popup__content");
+const popupInput = popupElement.querySelector(".popup__input");
+
+const showInputError = (popupElement, popupInput, errorMessage) => {
+  const popupError = popupElement.querySelector(`.${popupInput.id}-error`);
+  popupElement.classList.add("popup__input_type_error");
+  popupError.textContent = errorMessage;
+  popupError.classList.add("popup__input-error_active");
+};
+
+const hideInputError = (popupElement, popupInput) => {
+  const popupError = popupElement.querySelector(`.${popupInput.id}-error`);
+  popupElement.classList.remove("popup__input_type_error");
+  popupError.classList.remove("popup__input-error_active");
+  popupError.textContent = "";
+};
+
+const isValid = (popupElement, popupInput) => {
+  if (!popupInput.validity.valid) {
+    showInputError(popupElement, popupInput, popupInput.validationMessage);
+  } else {
+    hideInputError(popupElement, popupInput);
+  }
+};
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((popupInput) => {
+    return !popupInput.validity.valid;
+  })
+}; 
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add('popup__button-save_inactive');
+  } else {
+    buttonElement.classList.remove('popup__button-save_inactive');
+  }
+}; 
+
+const setEventListeners = (popupElement) => {
+  const inputList = Array.from(popupElement.querySelectorAll(".popup__input"));
+  const buttonElement = popupElement.querySelector('.popup__button-save');
+
+  inputList.forEach((popupInput) => {
+    popupInput.addEventListener("input", () => {
+      isValid(popupElement, popupInput);
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+}; 
+
+popupElement.addEventListener("submit", function (evt) {
+  evt.preventDefault();
+});
+
+const enableValidation = () => {
+  const popupList = Array.from(document.querySelectorAll('.popup__content'));
+
+  popupList.forEach((popupElement) => {
+    popupElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+    setEventListeners(popupElement);
+  });
+};
+
+popupInput.addEventListener("input", isValid); 
+enableValidation(); 
