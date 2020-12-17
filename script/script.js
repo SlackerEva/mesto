@@ -61,12 +61,22 @@ const buttonCloseShow = popupShow.querySelector(".popup__close");
 const buttonCloseAdd = popupAdd.querySelector(".popup__close");
 const buttonCloseEdit = popupEdit.querySelector(".popup__close");
 
+function pushedKey(evt, popup) {
+  if (evt.keyCode === 27) {
+    closePopup(popup);
+  }
+}
+
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  //popup.addEventListener("click", function() {closePopup(popup)});
+  document.addEventListener('keydown', function(evt) {pushedKey(evt, popup)}); 
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  //popup.removeEventListener("click", function() {closePopup(popup)});
+  document.removeEventListener('keydown', function(evt) {pushedKey(evt, popup)}); 
 }
 
 buttonAdd.addEventListener("click", function() {
@@ -79,6 +89,7 @@ buttonEdit.addEventListener("click", function() {
   nameInput.value = title.textContent;
   jobInput.value = paragraph.textContent;
 });
+
 buttonCloseEdit.addEventListener("click", function() {closePopup(popupEdit)});
 buttonCloseShow.addEventListener("click", function() {closePopup(popupShow)});
 buttonCloseAdd.addEventListener("click", function() {closePopup(popupAdd)});
@@ -110,21 +121,20 @@ function addListnerToImg(item) {
   });
 }
 
-
 const popupElement = document.querySelector(".popup__content");
 const popupInput = popupElement.querySelector(".popup__input");
 
 const showInputError = (popupElement, popupInput, errorMessage) => {
   const popupError = popupElement.querySelector(`.${popupInput.id}-error`);
-  popupElement.classList.add("popup__input_type_error");
+  popupInput.classList.add("popup__input_type_error");
   popupError.textContent = errorMessage;
-  popupError.classList.add("popup__input-error_active");
+  popupError.classList.add("popup__input-error");
 };
 
 const hideInputError = (popupElement, popupInput) => {
   const popupError = popupElement.querySelector(`.${popupInput.id}-error`);
-  popupElement.classList.remove("popup__input_type_error");
-  popupError.classList.remove("popup__input-error_active");
+  popupInput.classList.remove("popup__input_type_error");
+  popupError.classList.remove("popup__input-error");
   popupError.textContent = "";
 };
 
