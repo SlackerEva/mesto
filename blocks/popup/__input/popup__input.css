@@ -5,6 +5,7 @@
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding-bottom: 8.5px;
+  position: relative;
 }
 
 .popup__input:focus {
