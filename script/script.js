@@ -61,22 +61,29 @@ const buttonCloseShow = popupShow.querySelector(".popup__close");
 const buttonCloseAdd = popupAdd.querySelector(".popup__close");
 const buttonCloseEdit = popupEdit.querySelector(".popup__close");
 
-function pushedKey(evt, popup) {
+function pushedCloseKey(evt, popup) {
   if (evt.keyCode === 27) {
     closePopup(popup);
   }
 }
 
+function closeByOverlay(evt, popup) {
+  const popupPage = popup.querySelector(".popup__page");
+  if (evt.target == popupPage) {
+    closePopup(popup)
+  }
+}
+
 function openPopup(popup) {
   popup.classList.add("popup_opened");
-  //popup.addEventListener("click", function() {closePopup(popup)});
-  document.addEventListener('keydown', function(evt) {pushedKey(evt, popup)}); 
+  popup.addEventListener("click", function(evt) {closeByOverlay(evt, popup)});
+  document.addEventListener('keydown', function(evt) {pushedCloseKey(evt, popup)}); 
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
-  //popup.removeEventListener("click", function() {closePopup(popup)});
-  document.removeEventListener('keydown', function(evt) {pushedKey(evt, popup)}); 
+  popup.removeEventListener("click", function(evt) {closeByOverlay(evt, popup)});
+  document.removeEventListener('keydown', function(evt) {pushedCloseKey(evt, popup)}); 
 }
 
 buttonAdd.addEventListener("click", function() {
@@ -120,72 +127,3 @@ function addListnerToImg(item) {
     popupShow.querySelector(".popup__text").textContent = item.querySelector(".card__img").alt;
   });
 }
-
-const popupElement = document.querySelector(".popup__content");
-const popupInput = popupElement.querySelector(".popup__input");
-
-const showInputError = (popupElement, popupInput, errorMessage) => {
-  const popupError = popupElement.querySelector(`.${popupInput.id}-error`);
-  popupInput.classList.add("popup__input_type_error");
-  popupError.textContent = errorMessage;
-  popupError.classList.add("popup__input-error");
-};
-
-const hideInputError = (popupElement, popupInput) => {
-  const popupError = popupElement.querySelector(`.${popupInput.id}-error`);
-  popupInput.classList.remove("popup__input_type_error");
-  popupError.classList.remove("popup__input-error");
-  popupError.textContent = "";
-};
-
-const isValid = (popupElement, popupInput) => {
-  if (!popupInput.validity.valid) {
-    showInputError(popupElement, popupInput, popupInput.validationMessage);
-  } else {
-    hideInputError(popupElement, popupInput);
-  }
-};
-
-const hasInvalidInput = (inputList) => {
-  return inputList.some((popupInput) => {
-    return !popupInput.validity.valid;
-  })
-}; 
-
-const toggleButtonState = (inputList, buttonElement) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__button-save_inactive');
-  } else {
-    buttonElement.classList.remove('popup__button-save_inactive');
-  }
-}; 
-
-const setEventListeners = (popupElement) => {
-  const inputList = Array.from(popupElement.querySelectorAll(".popup__input"));
-  const buttonElement = popupElement.querySelector('.popup__button-save');
-
-  inputList.forEach((popupInput) => {
-    popupInput.addEventListener("input", () => {
-      isValid(popupElement, popupInput);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-}; 
-
-popupElement.addEventListener("submit", function (evt) {
-  evt.preventDefault();
-});
-
-const enableValidation = () => {
-  const popupList = Array.from(document.querySelectorAll('.popup__content'));
-
-  popupList.forEach((popupElement) => {
-    popupElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(popupElement);
-  });
-};
-
-popupInput.addEventListener("input", isValid); 
-enableValidation(); 
