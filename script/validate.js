@@ -1,6 +1,3 @@
-const popupElement = document.querySelector(".popup__content");
-const popupInput = popupElement.querySelector(".popup__input");
-
 const config = {
   popupSelector: '.popup__content',
   inputSelector: '.popup__input',
@@ -58,10 +55,6 @@ const setEventListeners = (popupElement, config) => {
   });
 }; 
 
-popupElement.addEventListener("submit", function (evt) {
-  evt.preventDefault();
-});
-
 const enableValidation = (config) => {
   const popupList = Array.from(document.querySelectorAll(config.popupSelector));
 
@@ -73,5 +66,4 @@ const enableValidation = (config) => {
   });
 };
 
-popupInput.addEventListener("input", isValid);
 enableValidation(config); 
