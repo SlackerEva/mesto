@@ -57,7 +57,7 @@ const setEventListeners = (popupElement, config) => {
 
 const enableValidation = (config) => {
   const popupList = Array.from(document.querySelectorAll(config.popupSelector));
-
+  console.log(popupList);
   popupList.forEach((popupElement) => {
     popupElement.addEventListener('submit', (evt) => {
       evt.preventDefault();

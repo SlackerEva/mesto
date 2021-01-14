@@ -1,3 +1,9 @@
+export {popupShow, openPopup};
+import {Card} from "./card.js";
+//import {FormValidator} from "./formValidation.js";
+import {initialCards} from "./array.js";
+
+const popupShow = document.querySelector(".popup-show");
 const popupEdit = document.querySelector(".popup-edit");
 const buttonAdd = document.querySelector(".intro__button-add");
 const buttonEdit = document.querySelector(".intro__button-edit");
@@ -15,22 +21,14 @@ const cardTemplate = document.querySelector("#card").content;
 const cardsContainer = document.querySelector(".cards");
 
 function renderCard(item) {
-  const cardElement = createCard(item);
-  cardsContainer.prepend(cardElement); 
+  const card = new Card(item, cardTemplate);
+  const cardElement = card.createCard();
+  cardsContainer.prepend(cardElement);
 }
 
-function createCard(item) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImg = cardElement.querySelector(".card__img");
-  cardImg.src = item.link;
-  cardImg.alt = item.name;
-  cardElement.querySelector(".card__subtitle").textContent = item.name;
-  addListnerToHeart(cardElement.querySelector(".card__button"));
-  removeCard(cardElement.querySelector(".card__button-trash"));
-  addListnerToImg(cardElement.querySelector(".card__button-show"), item);
-  return cardElement;
-}
-initialCards.map(item => renderCard(item));
+initialCards.forEach(item => {
+  renderCard(item);
+});
 
 function editProfile(evt) {
   evt.preventDefault();
@@ -52,7 +50,7 @@ function addCard(evt) {
   closePopup(popupAdd);
 }
 
-const popupShow = document.querySelector(".popup-show");
+
 const popupAdd = document.querySelector(".popup-add");
 const buttonCloseShow = popupShow.querySelector(".popup__close");
 const buttonCloseAdd = popupAdd.querySelector(".popup__close");
@@ -100,29 +98,3 @@ buttonCloseShow.addEventListener("click", function() {closePopup(popupShow)});
 buttonCloseAdd.addEventListener("click", function() {closePopup(popupAdd)});
 formEdit.addEventListener("submit", editProfile);
 formAdd.addEventListener("submit", addCard);
-
-function addListnerToHeart (item) {
-  item.addEventListener("click", function (evt) {
-    const eventTarget = evt.target;
-    eventTarget.getAttribute("src").includes("black") ? eventTarget.setAttribute("src", "images/heart.svg") : eventTarget.setAttribute("src", "images/blackHeart.svg");
-  });
-}
-
-function removeCard(item) {
-  item.addEventListener("click", function () {
-   const card = item.closest(".card");
-   card.remove();
-  });
-}
-
-const showImg = popupShow.querySelector(".popup__show-img");
-const popupShowText = popupShow.querySelector(".popup__text");
-
-function addListnerToImg(item, cardValue) {
-  item.addEventListener("click", function () {
-    openPopup(popupShow);
-    showImg.src = cardValue.link;
-    showImg.alt = cardValue.name;
-    popupShowText.textContent = cardValue.name;
-  });
-}
