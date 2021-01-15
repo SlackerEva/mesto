@@ -1,7 +1,8 @@
 export {popupShow, openPopup};
 import {Card} from "./card.js";
-//import {FormValidator} from "./formValidation.js";
+import {FormValidator} from "./formValidation.js";
 import {initialCards} from "./array.js";
+import {config} from "./validate.js";
 
 const popupShow = document.querySelector(".popup-show");
 const popupEdit = document.querySelector(".popup-edit");
@@ -30,6 +31,15 @@ initialCards.forEach(item => {
   renderCard(item);
 });
 
+function renderValidation(config) {
+  const popupList = Array.from(document.querySelectorAll(config.popupSelector));
+  popupList.forEach((popupElement) => {
+    const valid = new FormValidator(config, popupElement);
+    valid.enableValidation();
+  });
+}
+renderValidation(config); 
+
 function editProfile(evt) {
   evt.preventDefault();
   title.textContent = nameInput.value;
@@ -49,7 +59,6 @@ function addCard(evt) {
   }
   closePopup(popupAdd);
 }
-
 
 const popupAdd = document.querySelector(".popup-add");
 const buttonCloseShow = popupShow.querySelector(".popup__close");
@@ -87,6 +96,7 @@ buttonAdd.addEventListener("click", function() {
   placeNameInput.value = "";
   placeLinkInput.value = "";
 });
+
 buttonEdit.addEventListener("click", function() {
   openPopup(popupEdit);
   nameInput.value = title.textContent;
