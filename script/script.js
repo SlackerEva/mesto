@@ -1,6 +1,6 @@
 export {popupShow, openPopup};
-import {Card} from "./card.js";
-import {FormValidator} from "./formValidation.js";
+import {Card} from "./Card.js";
+import {FormValidator} from "./FormValidation.js";
 import {initialCards} from "./array.js";
 import {config} from "./validate.js";
 
@@ -21,9 +21,14 @@ const subtitle = document.querySelector(".popup__subtitle");
 const cardTemplate = document.querySelector("#card").content;
 const cardsContainer = document.querySelector(".cards");
 
-function renderCard(item) {
+function createCard(item) {
   const card = new Card(item, cardTemplate);
   const cardElement = card.createCard();
+  return cardElement
+}
+
+function renderCard(item) {
+  const cardElement = createCard(item);
   cardsContainer.prepend(cardElement);
 }
 
@@ -31,14 +36,11 @@ initialCards.forEach(item => {
   renderCard(item);
 });
 
-function renderValidation(config) {
-  const popupList = Array.from(document.querySelectorAll(config.popupSelector));
-  popupList.forEach((popupElement) => {
-    const valid = new FormValidator(config, popupElement);
-    valid.enableValidation();
-  });
-}
-renderValidation(config); 
+const profileValidator = new FormValidator(config, formEdit);
+profileValidator.enableValidation();
+
+const addCardValidator = new FormValidator(config, formAdd);
+addCardValidator.enableValidation();
 
 function editProfile(evt) {
   evt.preventDefault();
@@ -92,12 +94,14 @@ function closePopup(popup) {
 }
 
 buttonAdd.addEventListener("click", function() {
+  addCardValidator.resetValidation();
   openPopup(popupAdd);
   placeNameInput.value = "";
   placeLinkInput.value = "";
 });
 
 buttonEdit.addEventListener("click", function() {
+  profileValidator.resetValidation();
   openPopup(popupEdit);
   nameInput.value = title.textContent;
   jobInput.value = paragraph.textContent;

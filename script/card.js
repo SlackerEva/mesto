@@ -13,7 +13,7 @@ export class Card {
 
   _addCardListners(item) {
     this._addListnerToHeart(item.querySelector(".card__button"));
-    this._addListnerToImg(item.querySelector(".card__button-show"), this);
+    this._addListnerToImg(item.querySelector(".card__button-show"));
     this._removeCard(item.querySelector(".card__button-trash"));
   }
 
@@ -24,14 +24,14 @@ export class Card {
     });
   }
 
-  _addListnerToImg(item, cardValue) {
+  _addListnerToImg(item) {
     const showImg = popupShow.querySelector(".popup__show-img");
     const popupShowText = popupShow.querySelector(".popup__text");
-    item.addEventListener("click", function () {
+    item.addEventListener("click", () => {
       openPopup(popupShow);
-      showImg.src = cardValue._link;
-      showImg.alt = cardValue._name;
-      popupShowText.textContent = cardValue._name;
+      showImg.src = this._link;
+      showImg.alt = this._name;
+      popupShowText.textContent = this._name;
     });
   }
 
