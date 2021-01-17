@@ -54,8 +54,8 @@ export class FormValidator {
   resetValidation() {
     this._inputList.forEach(input => {
       this._hideInputError(input);
-      this._buttonElement.classList.remove(this._config.inactiveButtonClass);
     });
+    this._buttonElement.classList.remove(this._config.inactiveButtonClass);
   }
 
   enableValidation() {
