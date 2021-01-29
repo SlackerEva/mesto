@@ -1,4 +1,4 @@
-import {popupShow, openPopup} from "./script.js";
+import {popShow, popupShow} from "./../pages/index.js";
 export class Card {
   constructor(item, cardTemplate) {
     this._link = item.link;
@@ -28,7 +28,7 @@ export class Card {
     const showImg = popupShow.querySelector(".popup__show-img");
     const popupShowText = popupShow.querySelector(".popup__text");
     item.addEventListener("click", () => {
-      openPopup(popupShow);
+      popShow.openPopup();
       showImg.src = this._link;
       showImg.alt = this._name;
       popupShowText.textContent = this._name;
