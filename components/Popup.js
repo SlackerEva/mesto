@@ -7,19 +7,21 @@ class Popup {
   openPopup() {
     this._popup.classList.add("popup_opened");
     this._popup.addEventListener("click", this._closeByOverlay.bind(this));
-    document.addEventListener('keydown', this._handleEscClose.bind(this)); 
+    document.addEventListener('keydown', this._handleEscClose.bind(this));
+    this._popup.addEventListener("click", this.setEventListeners.bind(this));
   }
   
   closePopup() {
     this._popup.classList.remove("popup_opened");
     this._popup.removeEventListener("click", this._closeByOverlay.bind(this));
-    document.removeEventListener('keydown', this._handleEscClose.bind(this)); 
+    document.removeEventListener('keydown', this._handleEscClose.bind(this));
+    this._popup.removeEventListener("click", this.setEventListeners.bind(this));
   }
 
   _handleEscClose(evt) {
     const escapeCode = 27;
     if (evt.keyCode === escapeCode) {
-      this._popup.closePopup();
+      this.closePopup();
     }
   }
 
