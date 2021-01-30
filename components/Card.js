@@ -1,9 +1,10 @@
 import {popShow, popupShow} from "./../pages/index.js";
 export class Card {
-  constructor(item, cardTemplate) {
+  constructor({item, handleCardClick}, cardTemplate) {
     this._link = item.link;
     this._name = item.name;
     this._cardTemplate = cardTemplate;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -13,7 +14,7 @@ export class Card {
 
   _addCardListners(item) {
     this._addListnerToHeart(item.querySelector(".card__button"));
-    this._addListnerToImg(item.querySelector(".card__button-show"));
+    this._handleCardClick(item.querySelector(".card__button-show"));
     this._removeCard(item.querySelector(".card__button-trash"));
   }
 
@@ -25,13 +26,8 @@ export class Card {
   }
 
   _addListnerToImg(item) {
-    const showImg = popupShow.querySelector(".popup__show-img");
-    const popupShowText = popupShow.querySelector(".popup__text");
     item.addEventListener("click", () => {
-      popShow.openPopup();
-      showImg.src = this._link;
-      showImg.alt = this._name;
-      popupShowText.textContent = this._name;
+    popShow.openPopup(this);
     });
   }
 

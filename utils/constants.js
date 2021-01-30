@@ -1,4 +1,5 @@
-export {initialCards, config, cardTemplate, cardsContainer, popupShow, popupAdd, popupEdit};
+export {initialCards, config, cardTemplate, cardsContainer, popupShow, popupAdd, popupEdit,
+    buttonAdd, buttonEdit, formEdit, formAdd, nameInput, jobInput, placeNameInput, placeLinkInput, title, paragraph};
 
 const initialCards = [
   {
@@ -41,3 +42,13 @@ const cardsContainer = document.querySelector(".cards");
 const popupShow = document.querySelector(".popup-show");
 const popupAdd = document.querySelector(".popup-add");
 const popupEdit = document.querySelector(".popup-edit");
+const buttonAdd = document.querySelector(".intro__button-add");
+const buttonEdit = document.querySelector(".intro__button-edit");
+const formEdit = document.querySelector("form[name='edit-profile']");
+const formAdd = document.querySelector("form[name='add-card']");
+const nameInput = document.querySelector("input[name='username']");
+const jobInput = document.querySelector("input[name='userjob']");
+const placeNameInput = document.querySelector("input[name='placename']");
+const placeLinkInput = document.querySelector("input[name='placelink']");
+const title = document.querySelector(".intro__title");
+const paragraph = document.querySelector(".intro__paragraph");
