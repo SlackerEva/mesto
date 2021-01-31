@@ -1,4 +1,5 @@
 export {popShow, popupShow};
+import './index.css';
 import {Card} from "../components/Card.js";
 import {FormValidator} from "../components/FormValidation.js";
 import {initialCards, config, cardTemplate, cardsContainer, popupShow, popupAdd, popupEdit, buttonAdd, buttonEdit, formEdit, formAdd, 

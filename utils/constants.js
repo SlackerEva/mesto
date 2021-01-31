@@ -1,5 +1,6 @@
 export {initialCards, config, cardTemplate, cardsContainer, popupShow, popupAdd, popupEdit,
-    buttonAdd, buttonEdit, formEdit, formAdd, nameInput, jobInput, placeNameInput, placeLinkInput, title, paragraph};
+    buttonAdd, buttonEdit, formEdit, formAdd, nameInput, jobInput, placeNameInput, placeLinkInput, title, paragraph,
+    heartImage, blackHeartImage};
 
 const initialCards = [
   {
@@ -52,3 +53,6 @@ const placeNameInput = document.querySelector("input[name='placename']");
 const placeLinkInput = document.querySelector("input[name='placelink']");
 const title = document.querySelector(".intro__title");
 const paragraph = document.querySelector(".intro__paragraph");
+
+const heartImage = new URL('../images/heart.svg', import.meta.url);
+const blackHeartImage = new URL('../images/blackHeart.svg', import.meta.url);

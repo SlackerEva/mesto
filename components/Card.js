@@ -1,4 +1,4 @@
-import {popShow, popupShow} from "./../pages/index.js";
+import {heartImage, blackHeartImage} from "../utils/constants.js";
 export class Card {
   constructor({item, handleCardClick}, cardTemplate) {
     this._link = item.link;
@@ -21,13 +21,7 @@ export class Card {
   _addListnerToHeart(item) {
     item.addEventListener("click", function (evt) {
       const eventTarget = evt.target;
-      eventTarget.getAttribute("src").includes("black") ? eventTarget.setAttribute("src", "images/heart.svg") : eventTarget.setAttribute("src", "images/blackHeart.svg");
-    });
-  }
-
-  _addListnerToImg(item) {
-    item.addEventListener("click", () => {
-    popShow.openPopup(this);
+      eventTarget.getAttribute("src").includes("black") ? eventTarget.setAttribute("src", heartImage) : eventTarget.setAttribute("src", blackHeartImage);
     });
   }
 
