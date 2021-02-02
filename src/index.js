@@ -36,10 +36,10 @@ const popAdd = new PopupWithForm({
   popup: popupAdd, 
   formSubmit: (evt, values) => {
     evt.preventDefault();
-    const placeName = values.name;
-    const placeLink = values.link;
+    const placeName = values.placename;
+    const placeLink = values.placelink;
     if (placeName !="" && placeLink !="") {
-      let item = {name: placeName, link: placeLink};
+      const item = {name: placeName, link: placeLink};
       const cardElement = createCard(item);
       cardList.addItem(cardElement);
     }
@@ -56,7 +56,7 @@ const popEdit = new PopupWithForm({
     evt.preventDefault();
     title.textContent = values.username;
     paragraph.textContent = values.userjob;
-    userInfo.setUserInfo(nameInput, jobInput);
+    userInfo.setUserInfo(values.username, values.userjob);
     popEdit.closePopup();
   }
 });
