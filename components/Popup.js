@@ -2,20 +2,20 @@ export {Popup};
 class Popup {
   constructor(popup) {
     this._popup = popup;
+    this._closeByOverlay = this._closeByOverlay.bind(this);
+    this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   openPopup() {
     this._popup.classList.add("popup_opened");
-    this._popup.addEventListener("click", this._closeByOverlay.bind(this));
-    document.addEventListener('keydown', this._handleEscClose.bind(this));
-    this._popup.addEventListener("click", this.setEventListeners.bind(this));
+    this._popup.addEventListener("click", this._closeByOverlay);
+    document.addEventListener('keydown', this._handleEscClose);
   }
   
   closePopup() {
     this._popup.classList.remove("popup_opened");
-    this._popup.removeEventListener("click", this._closeByOverlay.bind(this));
-    document.removeEventListener('keydown', this._handleEscClose.bind(this));
-    this._popup.removeEventListener("click", this.setEventListeners.bind(this));
+    this._popup.removeEventListener("click", this._closeByOverlay);
+    document.removeEventListener('keydown', this._handleEscClose);
   }
 
   _handleEscClose(evt) {

@@ -6,11 +6,11 @@ class UserInfo {
   }
 
   getUserInfo() {
-    return {name: this._name, info: this._info};
+    return {name: this._name.textContent, info: this._info.textContent};
   }
 
   setUserInfo(nameInput, jobInput) {
-    this._name = nameInput.value;
-    this._info = jobInput.value;
+    this._name.textContent = nameInput.value;
+    this._info.textContent = jobInput.value;
   }
 }
