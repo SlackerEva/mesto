@@ -14,14 +14,15 @@ export class Card {
 
   _addCardListners(item) {
     this._addListnerToHeart(item.querySelector(".card__button"));
-    this._handleCardClick(item.querySelector(".card__button-show"));
+    item.querySelector(".card__button-show").addEventListener('click', this._handleCardClick);
     this._removeCard(item.querySelector(".card__button-trash"));
   }
 
   _addListnerToHeart(item) {
     item.addEventListener("click", function (evt) {
       const eventTarget = evt.target;
-      eventTarget.getAttribute("src").includes("black") ? eventTarget.setAttribute("src", heartImage) : eventTarget.setAttribute("src", blackHeartImage);
+      eventTarget.classList.toggle("card__like_active");
+      eventTarget.classList.contains("card__like_active") ? eventTarget.setAttribute("src", blackHeartImage) : eventTarget.setAttribute("src", heartImage);
     });
   }
 
