@@ -1,8 +1,8 @@
-export {initialCards, config, cardTemplate, cardsContainer, popupShow, popupAdd, popupEdit,
+export {config, cardTemplate, cardsContainer, popupShow, popupAdd, popupEdit,
     buttonAdd, buttonEdit, formEdit, formAdd, nameInput, jobInput, placeNameInput, placeLinkInput, title, paragraph,
     heartImage, blackHeartImage};
 
-const initialCards = [
+/*const initialCards = [
   {
       name: "Архыз",
       link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
@@ -27,7 +27,7 @@ const initialCards = [
       name: "Байкал",
       link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg"
   }
-]; 
+]; */
 
 const config = {
     popupSelector: '.popup__content',
