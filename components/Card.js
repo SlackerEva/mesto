@@ -1,10 +1,11 @@
 import {heartImage, blackHeartImage} from "../utils/constants.js";
 export class Card {
-  constructor({item, handleCardClick}, cardTemplate) {
+  constructor({item, handleCardClick, api}, cardTemplate) {
     this._link = item.link;
     this._name = item.name;
     this._cardTemplate = cardTemplate;
     this._handleCardClick = handleCardClick;
+    this._api = api;
   }
 
   _getTemplate() {

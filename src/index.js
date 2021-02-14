@@ -1,33 +1,49 @@
 export {popShow, popupShow};
 import './index.css';
+import {Api} from "../components/Api.js";
 import {Card} from "../components/Card.js";
 import {FormValidator} from "../components/FormValidation.js";
-import {initialCards, config, cardTemplate, cardsContainer, popupShow, popupAdd, popupEdit, buttonAdd, buttonEdit, formEdit, formAdd, 
+import {config, cardTemplate, cardsContainer, popupShow, popupAdd, popupEdit, buttonAdd, buttonEdit, formEdit, formAdd, 
   nameInput, jobInput, title, paragraph} from "../utils/constants.js";
 import {Section} from "../components/Section.js";
 import {PopupWithImage} from "../components/PopupWithImage.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
 import {UserInfo} from "../components/UserInfo.js";
 
-function createCard(item) {
-  const card = new Card({
-    item: item,
-    handleCardClick: () => {
-      popShow.openPopup(item);
-    } 
-  }, cardTemplate);
-  return card.createCard();
-};
 
-const cardList = new Section({
-  data: initialCards,
-  renderer: (item) => {
-    const cardElement = createCard(item);
-    cardList.addItem(cardElement);
+const api = new Api({
+  url: "https://mesto.nomoreparties.co/v1/cohort-20/cards",
+  headers: {
+    "authorization": "fb495017-080b-4391-8363-eb09bd7d470d",
+    "content-type": "application/json"
   }
-}, cardsContainer);
+}); 
 
-cardList.renderItems();
+let cardList;
+
+api.getInitialCards()
+  .then((data) => {
+    cardList = new Section({
+      data: data,
+      renderer: (item) => {
+        const cardElement = createCard(item);
+        cardList.addItem(cardElement);
+      },
+      api
+    }, cardsContainer); 
+    cardList.renderItems();
+  })
+  .catch(err=>console.log(err));
+
+function createCard(item) {
+    const card = new Card({
+      item: item,
+      handleCardClick: () => {
+        popShow.openPopup(item);
+      } 
+    }, cardTemplate);
+    return card.createCard();
+};
 
 const popShow = new PopupWithImage(popupShow);
 popShow.setEventListeners();
@@ -40,8 +56,12 @@ const popAdd = new PopupWithForm({
     const placeLink = values.placelink;
     if (placeName !="" && placeLink !="") {
       const item = {name: placeName, link: placeLink};
-      const cardElement = createCard(item);
-      cardList.addItem(cardElement);
+      api.addCard(item)
+        .then((item) => {
+          const cardElement = createCard(item);
+          cardList.addItem(cardElement);
+        })
+        .catch(err=>console.log(err));
     }
     popAdd.closePopup();
   }
