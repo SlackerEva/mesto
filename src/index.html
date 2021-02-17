@@ -14,9 +14,12 @@
 
     <main class="content">
       <section class="intro">
-        <img class="intro__img" src="<%=require('../images/jack.jpg')%>" alt="Фото Жака-Ив Кусто">
-        <h1 class="intro__title">Жак-Ив Кусто</h1>
-        <p class="intro__paragraph">Исследователь океана</p>
+        <div class="intro__wrapper-avatar">
+          <img class="intro__img" src="" alt="Аватарка">
+          <button class="intro__button-edit-avatar" type="button"></button>
+        </div>
+        <h1 class="intro__title"></h1>
+        <p class="intro__paragraph"></p>
         <button class="intro__button-edit" type="button">
           <img class="intro__img-edit" src="<%=require('../images/edit.svg')%>" alt="Редактировать">
         </button>
@@ -80,13 +83,37 @@
       </div>
     </div>
 
+    <div class="popup popup-delete">
+      <div class="popup__page">
+        <form class="popup__content" name="delete-card" novalidate>
+          <button class="popup__close" type="button"><img class="popup__img" src="<%=require('../images/cros.svg')%>" alt="Закрыть"></button>
+          <h2 class="popup__subtitle">Вы уверены?</h2>
+          <button class="popup__button-save" type="submit">Да</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup-edit-avatar">
+      <div class="popup__page">
+        <form class="popup__content" name="edit-avatar" novalidate>
+          <button class="popup__close" type="button"><img class="popup__img" src="<%=require('../images/cros.svg')%>" alt="Закрыть"></button>
+          <h2 class="popup__subtitle">Обновить аватар</h2>
+          <label class="popup__field">
+            <input id="placelink-input" class="popup__input" type="url" name="avatarlink" placeholder="Ссылка на картинку" required>
+            <span class="placelink-input-error"></span>
+          </label>
+          <button class="popup__button-save" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
     <template id="card">
       <li class="card">
         <button class="card__button-trash" type="button"><img class="card__tresh" src="<%=require('../images/trash.svg')%>" alt="Удалить"></button>
         <button class="card__button-show" type="button"><img class="card__img" src="<%=require('../images/dombai.jpg')%>" alt="Домбай"></button>
         <div class="card__panel">
           <h2 class="card__subtitle"></h2>
-          <button class="card__button" type="button"><img class="card__like" src="<%=require('../images/heart.svg')%>" alt="Лайк"></button>
+          <button class="card__button" type="button"><img class="card__like" src="<%=require('../images/heart.svg')%>" alt="Лайк"><p class="card__like-count"></p></button>
         </div>
       </li>
     </template>
