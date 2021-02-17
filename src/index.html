@@ -15,7 +15,7 @@
     <main class="content">
       <section class="intro">
         <div class="intro__wrapper-avatar">
-          <img class="intro__img" src="" alt="Аватарка">
+          <img class="intro__img" src="<%=require('../images/jack.jpg')%>" alt="Аватарка">
           <button class="intro__button-edit-avatar" type="button"></button>
         </div>
         <h1 class="intro__title"></h1>
@@ -99,8 +99,8 @@
           <button class="popup__close" type="button"><img class="popup__img" src="<%=require('../images/cros.svg')%>" alt="Закрыть"></button>
           <h2 class="popup__subtitle">Обновить аватар</h2>
           <label class="popup__field">
-            <input id="placelink-input" class="popup__input" type="url" name="avatarlink" placeholder="Ссылка на картинку" required>
-            <span class="placelink-input-error"></span>
+            <input id="avatarlink-input" class="popup__input" type="url" name="avatarlink" placeholder="Ссылка на картинку" required>
+            <span class="avatarlink-input-error"></span>
           </label>
           <button class="popup__button-save" type="submit">Сохранить</button>
         </form>
