@@ -1,5 +1,5 @@
 .card__button {
-  display: flex;
+  display: block;
   border: none;
   background: transparent;
   cursor: pointer;
