@@ -25,33 +25,23 @@ let cardList;
 
 const userInfo = new UserInfo({name: title, info: paragraph, avatar: avatar});
 
-Promise.all([
-  api.getProfile()
-    .then((dataProfile) => {
-      userInfo.setUserInfo(dataProfile.name, dataProfile.about);
-      userInfo.setUserAvatar(dataProfile.avatar);
-
-      api.getInitialCards()
-      .then((data) => {
-        cardList = new Section({
-          data: data,
-          renderer: (item) => {
-            const cardElement = createCard(item, dataProfile._id, api);
-            cardList.addItem(cardElement, data);
-          }
-        }, cardsContainer); 
-        cardList.renderItems();
-      })
-      .catch(err=>console.log(err));
-    })
-  .catch(err=>console.log(err))
-])    
-.then((values)=>{
-  const [getProfile, getInitialCards] = values;
-})
-.catch((err)=>{
-  console.log(err);
-})
+Promise.all([api.getProfile(), api.getInitialCards()])    
+  .then((values)=>{
+    const [getProfile, getInitialCards] = values;
+    userInfo.setUserInfo(getProfile.name, getProfile.about);
+    userInfo.setUserAvatar(getProfile.avatar);
+    cardList = new Section({
+      data: getInitialCards,
+      renderer: (item) => {
+        const cardElement = createCard(item, getProfile._id, api);
+        cardList.addItem(cardElement, getInitialCards);
+      }
+    }, cardsContainer); 
+    cardList.renderItems();
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
 
 function createCard(item, id, api) {
     const card = new Card({
@@ -68,8 +58,13 @@ function createCard(item, id, api) {
           popup: popupDelete,
           formSubmit: (evt) => {
             evt.preventDefault();       
-            api.removeCard(item._id);
-            popDelete.closePopup();
+            api.removeCard(item._id)
+              .then(()=>{
+                popDelete.closePopup();
+              })
+              .catch((err)=>{
+                console.log(err);
+              });
           }
         });
         popDelete.setEventListeners();
