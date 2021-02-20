@@ -1,4 +1,3 @@
-export {Popup};
 class Popup {
   constructor(popup) {
     this._popup = popup;
@@ -36,3 +35,5 @@ class Popup {
     buttonClose.addEventListener("click", this.closePopup.bind(this));
   }
 }
+
+export {Popup};

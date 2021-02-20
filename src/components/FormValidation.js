@@ -1,4 +1,4 @@
-export class FormValidator {
+class FormValidator {
   constructor(config, form) {
     this._config = config;
     this._form = form;
@@ -34,7 +34,7 @@ export class FormValidator {
     })
   }
 
-  _toggleButtonState() {
+  toggleButtonState() {
     if (this._hasInvalidInput(this._inputList)) {
       this._buttonElement.classList.add(this._config.inactiveButtonClass);
     } else {
@@ -46,7 +46,7 @@ export class FormValidator {
     this._inputList.forEach((popupInput) => {
       popupInput.addEventListener("input", () => {
         this._isValid(popupInput);
-        this._toggleButtonState();
+        this.toggleButtonState();
       });
     });
   }
@@ -65,3 +65,5 @@ export class FormValidator {
     this._setEventListeners();
   }
 }
+
+export {FormValidator};

@@ -1,33 +1,6 @@
 export {config, cardTemplate, cardsContainer, popupShow, popupDelete, popupAdd, popupEdit, popupEditAvatar, buttonEditAvatar,
     buttonAdd, buttonEdit, formEdit, formAdd, formAvatar, nameInput, jobInput, placeNameInput, placeLinkInput, title, paragraph, avatar,
-    heartImage, blackHeartImage};
-
-/*const initialCards = [
-  {
-      name: "Архыз",
-      link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
-  },
-  {
-      name: "Челябинская область",
-      link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg"
-  },
-  {
-      name: "Иваново",
-      link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg"
-  },
-  {
-      name: "Камчатка",
-      link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg"
-  },
-  {
-      name: "Холмогорский район",
-      link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg"
-  },
-  {
-      name: "Байкал",
-      link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg"
-  }
-]; */
+    heartImage, blackHeartImage, renderLoading};
 
 const config = {
     popupSelector: '.popup__content',
@@ -61,3 +34,12 @@ const avatar = document.querySelector(".intro__img");
 
 const heartImage = new URL('../images/heart.svg', import.meta.url);
 const blackHeartImage = new URL('../images/blackHeart.svg', import.meta.url);
+
+function renderLoading(popup, state) {
+    const button = popup.querySelector(".popup__button-save");
+    if (state) {
+        button.textContent = "Сохранение...";
+    } else {
+        button.textContent = "Сохранить";
+    }    
+}

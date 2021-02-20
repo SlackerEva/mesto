@@ -1,5 +1,4 @@
 import {Popup} from "./Popup.js";
-export {PopupForDelete};
 
 class PopupForDelete extends Popup{
   constructor({popup,  formSubmit}) {
@@ -15,3 +14,5 @@ class PopupForDelete extends Popup{
     });
   }
 }
+
+export {PopupForDelete};

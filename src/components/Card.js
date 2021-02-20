@@ -1,6 +1,5 @@
-import {heartImage, blackHeartImage} from "../utils/constants.js";
-export class Card {
-  constructor({item, id, api, handleCardClick}, cardTemplate) {
+class Card {
+  constructor({item, id, api, heartImage, blackHeartImage, handleCardClick, handleButtonClick}, cardTemplate) {
     this._link = item.link;
     this._name = item.name;
     this._likes = item.likes;
@@ -9,8 +8,12 @@ export class Card {
     this._owner = item.owner._id;
     this._cardTemplate = cardTemplate;
     this._handleCardClick = handleCardClick;
+    this._handleButtonClick = handleButtonClick;
     this._api = api;
+    this._heartImage = heartImage;
+    this._blackHeartImage = blackHeartImage;
     this._element = this._getTemplate();
+    this._trashBean = this._element.querySelector(".card__button-trash");
     this._cardLikeCount = this._element.querySelector(".card__like-count");
     this._cardLikes = this._element.querySelector(".card__like");  
   }
@@ -23,23 +26,21 @@ export class Card {
   _addCardListners(item) {
     this._addListnerToHeart(item.querySelector(".card__button"));
     item.querySelector(".card__button-show").addEventListener('click', this._handleCardClick);
-    item.querySelector(".card__button-trash").addEventListener('click', this._handleButtonClick);
-    this._removeCard(item.querySelector(".card__button-trash"));
+    this._trashBean.addEventListener('click', this._handleButtonClick);
+    this._removeCard();
   }
 
   _addListnerToHeart(item) {
-    item.addEventListener("click", (evt) => {
-      const eventTarget = evt.target;
-      eventTarget.classList.toggle("card__like_active");
-      eventTarget.classList.contains("card__like_active") ? this._addLike() : this._removeLike();
+    item.addEventListener("click", () => {
+      this._cardLikes.classList.toggle("card__like_active");
+      this._cardLikes.classList.contains("card__like_active") ? this._addLike() : this._removeLike();
     });
   }
   
   _addLike() {
     this._api.giveLike(this._id)
     .then((items) => {
-      this._cardLikeCount.textContent = items.likes.length;
-      this._cardLikes.setAttribute("src", blackHeartImage);
+      this._setLike(items, this._blackHeartImage);
     })
     .catch((err) => {console.log(err)});
   }
@@ -47,32 +48,36 @@ export class Card {
   _removeLike() {
     this._api.takeLike(this._id)
     .then((items) => {
-      this._cardLikeCount.textContent = items.likes.length;
-      this._cardLikes.setAttribute("src", heartImage);
+      this._setLike(items, this._heartImage);
     })
     .catch((err) => {console.log(err)});
+  }
+
+  _setLike(items, heart) {
+    this._cardLikeCount.textContent = items.likes.length;
+    this._cardLikes.setAttribute("src", heart);
   }
 
   _checkLike() {
     if (this._likes.length > 0){
       this._likes.forEach((item) => {
         if (item._id == this._mainId) { 
-          this._cardLikes.setAttribute("src", blackHeartImage);
+          this._cardLikes.setAttribute("src", this._blackHeartImage);
         } 
       })
     }
   }
 
-  _removeCard(item) {
-    item.addEventListener("click", () => {
-     const card = item.closest(".card");
+  _removeCard() {
+    this._trashBean.addEventListener("click", () => {
+     const card = this._trashBean.closest(".card");
      card.remove();
     });
   }
 
   _showTrashBean() {
     if (this._owner != this._mainId) {
-      const cardButtonTrash = this._element.querySelector(".card__button-trash");
+      const cardButtonTrash = this._trashBean;
       cardButtonTrash.classList.add("not-show-trashbean");
     }
   }
@@ -89,3 +94,5 @@ export class Card {
     return this._element;
   }
 }
+
+export {Card};
