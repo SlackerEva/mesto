@@ -1,7 +1,5 @@
 import {Popup} from "./Popup.js";
 
-export {PopupWithForm};
-
 class PopupWithForm extends Popup{
   constructor({popup, formSubmit}) {
     super(popup);
@@ -30,3 +28,5 @@ class PopupWithForm extends Popup{
     super.closePopup();
   }
 }
+
+export {PopupWithForm};
